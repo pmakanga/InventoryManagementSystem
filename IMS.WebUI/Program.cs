@@ -1,7 +1,9 @@
 using IMS.Application.DependancyInjection;
 using IMS.Infrastructure.DependancyInjection;
 using IMS.WebUI.Components;
+using IMS.WebUI.Components.Layout.Identity;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Syncfusion.Licensing;
@@ -11,6 +13,7 @@ SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NBaF5cXmZCe0xzW
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructureService(builder.Configuration);
 builder.Services.AddApplicationService();
+builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthStateProvider>();
 
 
 // Add services to the container.
@@ -34,5 +37,5 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
+app.MapSignOutEndpoint();
 app.Run();

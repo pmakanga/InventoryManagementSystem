@@ -1,0 +1,10 @@
+﻿@using IMS.Application.Service
+@using Microsoft.AspNetCore.Authorization
+@using WebUI.Components.Layout.Identity
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+
+@layout AuthenticationLayout
+@attribute [AllowAnonymous]
+@inject IAccountService accountService
+@inject NavigationManager NavManager
